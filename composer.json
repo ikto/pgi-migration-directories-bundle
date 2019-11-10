@@ -1,0 +1,24 @@
+{
+    "name": "ikto/pgi-migration-directories-bundle",
+    "type" : "symfony-bundle",
+    "description" : "Tool for applying database migrations based on PgI (Symfony 4 bundle)",
+    "license": "MIT",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Maxim Polishchuk",
+            "email": "mpolishchuck@ikto.net"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "ikto/pgi-migration-directories": "~1.0@alpha"
+    },
+    "require-dev": {},
+    "autoload" : {
+        "psr-4": {
+            "IKTO\\PgiMigrationDirectoriesBundle\\" : ["src/"]
+        }
+    },
+    "autoload-dev": {}
+}

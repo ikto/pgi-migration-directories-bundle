@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="pgi_migration_directories.factory.processor" class="IKTO\PgiMigrationDirectories\Processor\ProcessorFactory"/>
+
+        <service id="pgi_migration_directories.dbh.abstract" class="IKTO\PgI\Database\Database" abstract="true"/>
+
+        <service id="pgi_migration_directories.discovery.abstract" class="IKTO\PgiMigrationDirectories\Discovery\StandardDiscovery" abstract="true"/>
+
+        <service id="pgi_migration_directories.managed_db.abstract" class="IKTO\PgiMigrationDirectories\Database\DefaultManagedDatabase">
+            <call method="setProcessorFactory">
+                <argument type="service" id="pgi_migration_directories.factory.processor"/>
+            </call>
+        </service>
+
+        <service id="pgi_migration_directories.command_service_locator.abstract" abstract="true">
+            <argument type="collection">
+                <argument type="service" key="managed_db" id="pgi_migration_directories.managed_db.abstract"/>
+                <argument type="service" key="discovery" id="pgi_migration_directories.discovery.abstract"/>
+            </argument>
+        </service>
+
+        <service id="pgi_migration_directories.command.migrate_schema.abstract" class="IKTO\PgiMigrationDirectoriesBundle\Command\MigrateSchemaCommand"/>
+    </services>
+</container>
